@@ -13,7 +13,8 @@ app.use((req, res, next) => {
   });
 const httpServer = createServer(app);
 const io = new Server(httpServer,{
-	cors:'*'
+	cors:'*',
+	pingInterval: 10000,
 });
 
 app.get('/', (req, res) => {
@@ -22,7 +23,7 @@ app.get('/', (req, res) => {
   
   // API Status để kiểm tra trạng thái kết nối của Socket.IO
 app.get('/status', (req, res) => {
-	res.json({ status: io.engine.clientsCount > 0 ? 'connected' : 'disconnected' });
+	res.json({ status: io.engine.clientsCount  });
 });
 
 io.on("connection", (socket) => {
