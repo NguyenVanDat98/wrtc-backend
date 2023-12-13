@@ -86,6 +86,6 @@ socketIo.on("connection", (socket) => {
   });
 });
 
-server.listen(3000, () => {
-    console.log('Server đang chay tren cong 3000');
+server.listen(5000, () => {
+    console.log('Server đang chay tren cong 5000');
 });
