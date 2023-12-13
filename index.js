@@ -17,9 +17,9 @@ const io = new Server(httpServer,{
 	pingInterval: 10000,
 });
 
-app.get('/', (req, res) => {
-	res.sendFile(__dirname + '/index.html');
-  });
+// app.get('/', (req, res) => {
+// 	res.sendFile(__dirname + '/index.html');
+//   });
   
   // API Status để kiểm tra trạng thái kết nối của Socket.IO
 app.get('/status', (req, res) => {
