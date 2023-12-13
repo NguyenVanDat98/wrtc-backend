@@ -13,7 +13,11 @@ app.use((req, res, next) => {
   });
 const httpServer = createServer(app);
 const io = new Server(httpServer,{
-	cors:'*',
+	cors:{
+		origin: '*',
+		methods: ['GET', 'POST'],
+		credentials: true,
+	},
 	pingInterval: 10000,
 });
 //
