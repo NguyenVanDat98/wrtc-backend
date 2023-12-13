@@ -58,13 +58,13 @@
 import express from 'express';
 import { createServer } from "http";
 import cors from "cors"
-
+import { Server } from "socket.io";
 
 var app = express();
 app.use(cors())
 const server = createServer(app);
 
-const socketIo = require("socket.io")(server, {
+const socketIo = new Server(server, {
     cors: {
         origin: "*",
     }
