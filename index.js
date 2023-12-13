@@ -7,8 +7,8 @@ const app = express();
 
 app.use(cors())
 app.use((req, res, next) => {
-	res.setHeader('Referrer-Policy', 'same-origin');
-	res.setHeader('Access-Control-Allow-Origin', '*');
+	// res.setHeader('Referrer-Policy', 'same-origin');
+	// res.setHeader('Access-Control-Allow-Origin', '*');
 	next();
   });
 const httpServer = createServer(app);
@@ -18,7 +18,7 @@ const io = new Server(httpServer,{
 		methods: ['GET', 'POST'],
 		credentials: true,
 	},
-	pingInterval: 10000,
+	// pingInterval: 10000,
 });
 //
 // app.get('/', (req, res) => {
