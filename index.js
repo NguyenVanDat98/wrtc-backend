@@ -16,7 +16,7 @@ const io = new Server(httpServer,{
 	cors:'*',
 	pingInterval: 10000,
 });
-
+//
 // app.get('/', (req, res) => {
 // 	res.sendFile(__dirname + '/index.html');
 //   });
