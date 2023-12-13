@@ -1,0 +1,45 @@
+import express from "express";
+import { createServer } from "http";
+import { Server } from "socket.io";
+import cors from "cors"
+
+const app = express();
+
+app.use(cors())
+const httpServer = createServer(app);
+const io = new Server(httpServer);
+
+app.get('/', (req, res) => {
+	res.sendFile(__dirname + '/index.html');
+  });
+  
+  // API Status để kiểm tra trạng thái kết nối của Socket.IO
+app.get('/status', (req, res) => {
+	res.json({ status: io.engine.clientsCount > 0 ? 'connected' : 'disconnected' });
+});
+
+io.on("connection", (socket) => {
+
+	socket.emit("me", socket.id);	
+
+	socket.on("listenRoom", (object) => {
+		console.log('object :>> ', object);
+	});
+	socket.on("disconnect", () => {
+		socket.broadcast.emit("callEnded")
+	});
+
+	socket.on("callUser", ({ userToCall, signalData, from, name }) => {
+		io.to(userToCall).emit("callUser", { signal: signalData, from, name });
+	});
+
+	socket.on("answerCall", (data) => {
+		io.to(data.to).emit("callAccepted", data.signal)
+	});
+
+  // ...
+});
+
+httpServer.listen(5000,() => {
+	console.log(`Server is running on http://localhost:${5000}`)
+});
